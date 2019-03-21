@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: head-source">
+<body class="list-back" >
+<nav th:replace="base :: main-navbar"></nav>
+<div class="container p-5 bg-light">
+
+    <div class="emptySpace"></div>
+
+    <a class="text-info" href="/add">Show All Menus</a><br/>
+
+    Item : <span th:text="${cafe.item}"></span><br/>
+    Price: <span th:text="${cafe.price}"></span><br/>
+    Description : <span th:text="${cafe.description}"></span><br/>
+
+    <a th:href="@{/delete/{id}(id=${cafe.id})}">Delete this Menu</a>
+</div>
+</body>
+</html>

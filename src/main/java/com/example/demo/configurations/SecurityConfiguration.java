@@ -57,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public static BCryptPasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
   }
-
+//
 //  @Override
 //  protected void configure(AuthenticationManagerBuilder auth) throws Exception
 //  {

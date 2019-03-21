@@ -14,10 +14,14 @@
     <style>
         body {
             padding-bottom: 70px;
+
+            background: linear-gradient(rgba(216, 40, 89, 0.5), rgba(63, 193, 97, 0.21));
+            background-size: cover;
         }
         .container{
             padding-top: 50px;
         }
+
     </style>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -25,7 +29,7 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" th:fragment="navbar">
     <a class="navbar-brand" href="#">Security</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
@@ -33,7 +37,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home <span class="sr-only">
                         (current)</span></a>
@@ -47,6 +51,9 @@
             <li class="nav-item" sec:authorize="isAuthenticated()">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/add">Add Item</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -55,11 +62,9 @@
 <h1>Hello, world!</h1>
 
 <nav class="navbar navbar-dark bg-dark fixed-bottom" th:fragment="footer">
-    <div class="container">
             <a class="nav-item nav-link" href="/">Home </a>
             <a class="nav-item nav-link" href="/secure">Secure </a>
-            <a class="nav-item nav-link" href="#">Copyright 2019 - Josemy Joseph</a>
-    </div>
+            <a class="nav-item nav-link" href="#">Copyright 2019 - Jennifer "Java Girl" Ukegbu</a>
 </nav>
 
 <th:block th:fragment="jslinks">

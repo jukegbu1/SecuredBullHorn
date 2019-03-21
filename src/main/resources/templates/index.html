@@ -25,6 +25,38 @@
         This content is only shown to anonymous users.
     </div>
 
+
+    <table class="table">
+        <thead class="thead-background">
+        <tr>
+            <th>Menu Item</th>
+            <th>price</th>
+            <th>description</th>
+            <th>picture</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="menu : ${menus}">
+
+            <td th:text="${menu.item}"></td>
+            <td th:text="${menu.price}"></td>
+            <td th:text="${menu.description}"></td>
+            <td>
+                <div  th:if="${menu.image} != null">
+                    <img style="width: 150px;" th:src="${menu.image}" />
+                </div>
+            </td>
+            <td>
+                <a th:href="@{/update/{id}(id=${menu.id})}">Update</a> -
+                <a th:href="@{/detail/{id}(id=${menu.id})}">Details</a> -
+                <a th:href="@{/delete/{id}(id=${menu.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+
 </div>
 <nav th:replace="base :: footer"></nav>
 <th:block th:replace="base :: jslinks"></th:block>
