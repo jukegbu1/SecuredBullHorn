@@ -1,7 +1,10 @@
 package com.example.demo.controllers;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.demo.beans.Menu;
 import com.example.demo.beans.User;
+import com.example.demo.configurations.CloudinaryConfig;
 import com.example.demo.repositories.MenuRepository;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +14,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 public class HomeController {
 
   private UserService userService;
+
+  @Autowired
+  CloudinaryConfig cloudc;
 
   @Autowired
   MenuRepository menuRepository;
@@ -64,9 +73,20 @@ public class HomeController {
 
   @PostMapping("/process")
   public String processForm(@Valid
-                            @ModelAttribute Menu menu, BindingResult result){
+                            @ModelAttribute Menu menu, BindingResult result, @RequestParam("file") MultipartFile file){
+    if (file.isEmpty()) {
+      return "redirect:/add";
+    }
     if (result.hasErrors()) {
       return "menuform";
+    }try {
+      Map uploadResult = cloudc.upload(file.getBytes(),
+              ObjectUtils.asMap("resourcetype", "auto"));
+      menu.setImage(uploadResult.get("url").toString());
+      menuRepository.save(menu);
+    }catch (IOException e) {
+      e.printStackTrace();
+      return "redirect:/add";
     }
     menuRepository.save(menu);
     return "redirect:/";
