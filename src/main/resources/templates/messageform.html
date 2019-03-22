@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <th:block th:replace="base :: headstuff"></th:block>
+
+
+</head>
+<body>
+
+<div class="space"></div>
+
+<div class="container p-5 bg-background"> </div>
+
+    <h2 class="text-center">Update & add messages! </h2>
+
+    <div class="col-md-6 col-md-offset-3"></div>
+
+<form action="#"
+      enctype="multipart/form-data"
+      method="post"
+      th:action="@{/process}" th:object="${message}">
+
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label> Title: </label><input type="text" th:field="*{title}" />
+    <span th:if="${#fields.hasErrors('title')}"
+          th:errors="*{title}"></span><br/>
+
+    <label> Content: </label><textarea rows="3" th:field="*{content}" />
+    <span th:if="${#fields.hasErrors('content')}"
+          th:errors="*{content}"></span><br/>
+
+    <label> Posted Date: </label><input type="date" th:field="*{postedDate}" />
+    <span th:if="${#fields.hasErrors('postedDate')}"
+          th:errors="*{postedDate"}></span><br/>
+
+    <label>  Posted By: </label><input type="text" th:field="*{postedBy}" />
+    <span th:if="${#fields.hasErrors('postedBy')}"
+          th:errors="*{postedBy"}></span><br/>
+
+    <label>Image</label><br/>
+    <input type="file" class="form-control" name="file"/>
+    <br />
+    <input class="btn btn-info btn-sm" type="submit" value="Submit"/>
+
+</body>
+</html>

@@ -7,13 +7,17 @@
 
     <div class="emptySpace"></div>
 
-    <a class="text-info" href="/add">Show All Menus</a><br/>
+    <button href="/" type="button" class="btn btn-info">View All Messages</button>
 
-    Item : <span th:text="${cafe.item}"></span><br/>
-    Price: <span th:text="${cafe.price}"></span><br/>
-    Description : <span th:text="${cafe.description}"></span><br/>
+    <section class="container text-left">
+        Title : <span th:text="${message.title}"></span><br>
+        Content : <span th:text="${message.content}"></span><br>
+        Posted Date : <span th:text="${message.postedDate}"></span><br>
+        Posted By: <span th:text="${message.postedBy}"></span><br>
+        <a th:href="@{/delete/{id}(id=${message.id})}">Delete this message</a>
+    </section>
 
-    <a th:href="@{/delete/{id}(id=${cafe.id})}">Delete this Menu</a>
+
 </div>
 </body>
 </html>
